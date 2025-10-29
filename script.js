@@ -117,7 +117,7 @@ function renderCars() {
     });
     
     // Add event listeners to buy buttons
-    document.querySelectorAll('.buy-btn').forEach((button, index) => {
+    document.querySelectorAll('.buy-btn').forEach((button) => {
         button.addEventListener('click', function() {
             const carIndex = this.parentElement.getAttribute('data-car');
             showCarModal(carIndex);
@@ -138,16 +138,17 @@ function addSearchAndFilter() {
         const priceRange = priceFilter.value;
         const carCards = document.querySelectorAll('.car-card');
         
-        carCards.forEach((card, index) => {
-            const car = window.carsData[index];
+        carCards.forEach((card) => {
+            const carIndex = parseInt(card.getAttribute('data-car'));
+            const car = window.carsData[carIndex];
             const price = parseInt(car.price.replace(/[^\d]/g, ''));
             const matchesSearch = car.name.toLowerCase().includes(searchTerm);
-            
+
             let matchesPrice = true;
             if (priceRange === 'low') matchesPrice = price < 100000;
             else if (priceRange === 'medium') matchesPrice = price >= 100000 && price <= 200000;
             else if (priceRange === 'high') matchesPrice = price > 200000;
-            
+
             card.style.display = matchesSearch && matchesPrice ? 'block' : 'none';
         });
     }

@@ -12,6 +12,9 @@ export default [
         console: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        fetch: 'readonly',
+        DOMParser: 'readonly',
+        alert: 'readonly',
       },
     },
     rules: {

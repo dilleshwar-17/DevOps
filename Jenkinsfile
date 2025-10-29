@@ -26,7 +26,11 @@ pipeline {
             steps {
                 script {
                     if (fileExists('package.json')) {
-                        sh 'npm install'
+                        if (isUnix()) {
+                            sh 'npm install'
+                        } else {
+                            bat 'npm install'
+                        }
                         env.NPM_INSTALLED = 'true'
                     } else {
                         env.NPM_INSTALLED = 'false'
