@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  tevra-web:
+    build: .
+    ports:
+      - "80:80"
+    container_name: tevra-website-prod
+    restart: always
+    environment:
+      - NODE_ENV=production

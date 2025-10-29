@@ -18,6 +18,11 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
 
@@ -32,25 +37,17 @@
 
         <section id="cars" class="cars-section">
             <h2>Our Premium Collection</h2>
-            <div class="cars-grid">
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400" alt="Luxury Car 1">
-                    <h3>Mercedes S-Class</h3>
-                    <p class="price">$95,000</p>
-                    <button class="buy-btn">View Details</button>
-                </div>
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400" alt="Luxury Car 2">
-                    <h3>BMW 7 Series</h3>
-                    <p class="price">$88,000</p>
-                    <button class="buy-btn">View Details</button>
-                </div>
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" alt="Luxury Car 3">
-                    <h3>Audi A8</h3>
-                    <p class="price">$92,000</p>
-                    <button class="buy-btn">View Details</button>
-                </div>
+            <div class="filter-bar">
+                <input type="text" id="searchInput" placeholder="Search cars...">
+                <select id="priceFilter">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under $100k</option>
+                    <option value="medium">$100k - $200k</option>
+                    <option value="high">$200k+</option>
+                </select>
+            </div>
+            <div class="cars-grid" id="carsGrid">
+                <!-- Cars will be loaded dynamically from XML -->
             </div>
         </section>
 
@@ -66,6 +63,12 @@
                 <p>📞 +91 123-4567-890</p>
                 <p>📍 123 Luxury Lane, Premium City</p>
             </div>
+            <form id="contactForm" class="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
         </section>
     </main>
 
@@ -73,6 +76,53 @@
         <p>&copy; 2024 Tevra Premium Cars. All rights reserved.</p>
     </footer>
 
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h2 id="modalTitle"></h2>
+                    <p class="modal-price" id="modalPrice"></p>
+                </div>
+                <div class="specs">
+                    <h3>Specifications</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Engine:</span>
+                            <span id="modalEngine"></span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Horsepower:</span>
+                            <span id="modalHorsepower"></span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">0-60 mph:</span>
+                            <span id="modalAcceleration"></span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Drivetrain:</span>
+                            <span id="modalDrivetrain"></span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Fuel Type:</span>
+                            <span id="modalFuelType"></span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Transmission:</span>
+                            <span id="modalTransmission"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-description">
+                    <h3>Description</h3>
+                    <p id="modalDesc"></p>
+                </div>
+                <button class="contact-btn">Contact Sales</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="currency.js"></script>
 </body>
 </html>

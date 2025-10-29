@@ -22,7 +22,27 @@ jobs:
       run: npm install
       
     - name: Build
-      run: echo "Building application..."
+      run: |
+        npm run build
+        docker build -t tevra-website:${{ github.sha }} .
       
     - name: Test
-      run: echo "Running tests..."
+      run: |
+        npm test
+        docker run --rm tevra-website:${{ github.sha }} nginx -t
+        
+    - name: Calculate CI Costs
+      run: |
+        echo "=== CI Pipeline Cost Analysis ==="
+        BUILD_TIME_MINUTES=5
+        RUNNER_COST_PER_MINUTE_USD=0.008
+        TOTAL_COST_USD=$(echo "$BUILD_TIME_MINUTES * $RUNNER_COST_PER_MINUTE_USD" | bc -l)
+        TOTAL_COST_INR=$(echo "$TOTAL_COST_USD * 83.5" | bc -l)
+        echo "Build time: $BUILD_TIME_MINUTES minutes"
+        echo "Cost in USD: \$$(printf "%.4f" $TOTAL_COST_USD)"
+        echo "Cost in INR: ₹$(printf "%.2f" $TOTAL_COST_INR)"
+        
+    - name: Cleanup
+      if: always()
+      run: |
+        docker rmi tevra-website:${{ github.sha }} || true

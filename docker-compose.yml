@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  tevra-web:
+    build: .
+    ports:
+      - "${PORT:-8080}:80"
+    container_name: tevra-website
+    restart: unless-stopped
